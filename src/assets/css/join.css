@@ -1,0 +1,42 @@
+/* HEADER */
+.container .join {
+  width: 100%;
+  min-height: calc(100vh - 120px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  /* border: 2px solid var(--text); */
+}
+
+.container .join .btn {
+  display: flex;
+  height: 67px;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4em;
+  padding: 0em 2.2em;
+  border-radius: 5px;
+  color: var(--text);
+  background: var(--primary2);
+  font-family: "Myfonts2", sans-serif;
+}
+.container .join .btn:hover {
+  animation: shake 0.5s; /* Duration of shake animation */
+  animation-iteration-count: 5;
+}
+
+/****•••••••••••MOBILE RESPONSIVENESS•••••••••••••****/
+@media (max-width: 768px) {
+  .container .join {
+    width: 100%;
+    flex-direction: column;
+    gap: 4em;
+  }
+  .container .join .btn {
+    display: flex;
+    height: 67px;
+    width: 85%;
+  }
+}

@@ -1,0 +1,325 @@
+.container .quest {
+  width: 100%;
+  height: auto;
+  padding: 0em 6em;
+  /* border: 2px solid var(--text); */
+}
+.container .quest .child {
+  width: 100%;
+  height: calc(100vh - 12em);
+  display: flex;
+  align-items: flex-start;
+  gap: 4em;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  /* border: 2px solid #fff; */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.container .quest .child::-webkit-scrollbar {
+  display: none;
+}
+
+.container .quest .image_display {
+  width: 40%;
+}
+.container .quest .image_display img {
+  object-fit: contain;
+  width: 100%;
+  flex-shrink: none;
+  /* border: 2px solid var(--text); */
+}
+.container .quest .txt_cont {
+  width: 50%;
+  color: var(--text);
+  font-family: "Onest", sans-serif;
+  padding-top: 6em;
+  /* border: 2px solid var(--text); */
+}
+
+.container .quest .txt_cont h3 {
+  font-size: 6em;
+  margin: 0.2em auto;
+}
+
+.container .quest .txt_cont p {
+  font-size: 2em;
+  width: 100%;
+  overflow: hidden;
+  margin: 0.5em auto;
+  margin-bottom: 2em;
+}
+.container .quest .txt_cont p span {
+  text-decoration: underline;
+  color: var(--primary2);
+}
+.container .quest .txt_cont ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2em;
+  margin-bottom: 1em;
+}
+.container .quest .txt_cont ul li {
+  font-family: "Onest", sans-serif;
+  font-size: 5em;
+  font-weight: 600;
+}
+.container .quest .txt_cont ul li.coin {
+  font-size: 4em;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.container .quest .txt_cont ul li img {
+  object-fit: contain;
+  width: 12px;
+}
+
+.container .quest .txt_cont input {
+  color: var(--text);
+  width: calc(100% - 30px);
+  height: 55px;
+  padding: 0.5em 1.5em;
+  outline: none;
+  background: transparent;
+  font-family: "Onest", sans-serif;
+  border: 1px solid var(--header);
+  margin-bottom: 2em;
+}
+
+.container .quest .txt_cont .btn {
+  width: 60%;
+  /* display: flex; */
+  font-family: "Myfonts2", sans-serif;
+  font-size: 1.8em;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0.8em 2em;
+  justify-content: center;
+  background: var(--bg);
+  border-radius: 5px;
+  margin: 0em auto;
+  background: var(--header);
+  border: none;
+  opacity: 0.5;
+}
+.container .quest .txt_cont .btn.active {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.container .overlay {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 999999;
+}
+.container .overlay .overBox {
+  width: 400px;
+  height: auto;
+  padding: 1em 1em;
+  background: var(--text);
+  border-radius: 5px;
+}
+.container .overlay .overBox img {
+  display: block;
+  object-fit: contain;
+  height: 200px;
+  background: var(--text);
+  margin: 1em auto;
+}
+
+.container .overlay .overBox .details {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container .overlay .overBox h1 {
+  font-size: 4em;
+  color: var(--bg);
+  text-align: center;
+  margin-bottom: 0.2em;
+}
+.container .overlay .overBox .details p {
+  font-size: 2em;
+  font-family: "Onest", sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+.container .overlay .overBox .details p span {
+  font-size: 1.5em;
+  font-weight: 800;
+  margin-left: 0.1em;
+}
+
+.container .overlay .overBox button {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 2em;
+  color: var(--text);
+  font-family: "Myfonts2", sans-serif;
+  /* font-family: "Onest", sans-serif; */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.6em 3em;
+  border-radius: 3px;
+  margin: 0.5em auto;
+  margin-top: 1em;
+  cursor: pointer;
+  background: var(--primary2);
+}
+
+/* ************MEDIA QUERRY********************** */
+
+/* ********@MOBILE********* */
+
+@media (max-width: 767px) {
+  .container .quest {
+    width: 100%;
+    height: auto;
+    padding: 0em 2em;
+    /* border: 2px solid var(--text); */
+  }
+  .container .quest .child {
+    width: 100%;
+    height: calc(100vh - 12em);
+    display: flex;
+    align-items: flex-start;
+    gap: 2em;
+    /* border: 2px solid #fff; */
+    flex-direction: column;
+  }
+  .container .quest .image_display {
+    width: 100%;
+  }
+  .container .quest .image_display img {
+    width: 100%;
+    flex-shrink: none;
+  }
+  .container .quest .txt_cont {
+    width: 100%;
+    padding-top: 0em;
+  }
+
+  .container .quest .txt_cont h3 {
+    font-size: 3em;
+    margin: 0.2em auto;
+  }
+
+  .container .quest .txt_cont p {
+    font-size: 1.4em;
+    width: 100%;
+    overflow: hidden;
+    margin: 1em auto;
+    margin-bottom: 1em;
+  }
+  .container .quest .txt_cont p span {
+    text-decoration: underline;
+  }
+  .container .quest .txt_cont ul {
+    width: 100%;
+    gap: 1.5em;
+    margin-bottom: 1em;
+  }
+  .container .quest .txt_cont ul li {
+    font-size: 3.2em;
+  }
+  .container .quest .txt_cont ul li.coin {
+    font-size: 3em;
+  }
+  .container .quest .txt_cont ul li img {
+    object-fit: contain;
+    width: 12px;
+  }
+
+  .container .quest .txt_cont input {
+    width: 100%;
+    height: 55px;
+    padding: 0.5em 1.5em;
+    margin-bottom: 2em;
+  }
+
+  .container .quest .txt_cont .btn {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  .container .quest .txt_cont .btn.active {
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  .container .overlay {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 999999;
+  }
+  .container .overlay .overBox {
+    width: 350px;
+  }
+  .container .overlay .overBox img {
+    height: 150px;
+  }
+}
+
+/**** TAB RESPONSIVENESS•••••••••••••****/
+@media (min-width: 768px) and (max-width: 1280px) {
+  .container .quest {
+    width: 100%;
+    height: auto;
+    padding: 0em 4em;
+    /* border: 2px solid var(--text); */
+  }
+  .container .quest .child {
+    width: 100%;
+    height: calc(100vh - 8em);
+    display: flex;
+    align-items: flex-start;
+    gap: 4em;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    /* border: 2px solid #fff; */
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .container .quest .child::-webkit-scrollbar {
+    display: none;
+  }
+
+  .container .quest .image_display {
+    width: 42%;
+    position: sticky;
+    top: 0%;
+  }
+  .container .quest .image_display img {
+    object-fit: contain;
+    width: 100%;
+    flex-shrink: none;
+    /* border: 2px solid var(--text); */
+  }
+  .container .quest .txt_cont {
+    width: 55%;
+    padding-bottom: 2em;
+    /* border: 2px solid var(--text); */
+  }
+}
