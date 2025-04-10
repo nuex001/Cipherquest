@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../assets/css/home.css";
-import bg from "../../assets/images/bg1.png";
+import bg from "../../assets/images/bg.webp";
 import { PiGameControllerFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
 
