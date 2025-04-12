@@ -115,6 +115,8 @@ font-family: "Grenze Gotisch", serif;
   background: var(--primary2);
   font-family: "Myfonts2", sans-serif;
   margin-left: 0.5em;
+  border: none;
+  cursor: pointer;
 }
 .container nav .socialLinks .btn:hover {
   animation: shake 0.5s; /* Duration of shake animation */
@@ -132,6 +134,7 @@ font-family: "Grenze Gotisch", serif;
   top: 0%;
   left: 0%;
   background: var(--bg);
+  /* z-index: 888; */
 }
 
 .container .loader_cont .loading_child {
@@ -140,20 +143,21 @@ font-family: "Grenze Gotisch", serif;
   animation: rotate 2s infinite linear;
 }
 .container .loader_cont .loading_child:first-child {
+  background: var(--text);
   border-right: 10px solid var(--primary2);
-  z-index: 2;
+  z-index: 9999;
 }
 .container .loader_cont .loading_child:nth-child(2) {
   border-left: 10px solid var(--primary1);
-  z-index: 3;
+  z-index: 99999;
 }
 .container .loader_cont .loading_child:nth-child(3) {
   border-bottom: 10px solid var(--header);
-  z-index: 4;
+  z-index: 999999;
 }
 .container .loader_cont .loading_child:nth-child(4) {
   border-top: 10px solid var(--primary);
-  z-index: 5;
+  z-index: 999999;
 }
 .container .loader_cont .loading_child:nth-child(4) {
   background: transparent;

@@ -10,7 +10,7 @@ function Home() {
   const message =
   "Stake your treasure, crack the code, and claim your victory.... If you need a video guide, click This ";
 
-
+  // https://base-sepolia.drpc.org
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {

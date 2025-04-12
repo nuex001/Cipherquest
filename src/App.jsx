@@ -18,7 +18,7 @@ function App() {
           <Route exact path="/join" element={<Join />} />
           <Route exact path="/create" element={<Create />} />
           <Route path="/explore/*" element={<BaseSection />} />
-          <Route path="/quest/1" element={<Quest />} />
+          <Route path="/quest/:id" element={<Quest />} />
           </Routes>
       </div>
     </BrowserRouter>

@@ -43,6 +43,13 @@ gap: 1em;
     outline: none;
     border-radius: 2px;
 }
+.container .create form .rows span{
+  color: var(--primary2);
+  font-family: "Onest", sans-serif;
+  font-size: 1.4em;
+  letter-spacing: -0.5px;
+  text-align: left;
+}
 .container .create form .rows textarea{
     width: 100%;
     height: 200px;
@@ -113,6 +120,9 @@ gap: 1em;
     padding: 2em 2em;
     border-radius: 5px;
   }
+  .container .create .modal_cont.err .modal_content{
+    background: crimson;
+      }
   .container .create .modal_cont .modal_content .icon{
     color: var(--text);
     font-size: 8em;

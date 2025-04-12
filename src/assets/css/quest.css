@@ -126,14 +126,18 @@
   width: 400px;
   height: auto;
   padding: 1em 1em;
+  color: var(--bg);
   background: var(--text);
   border-radius: 5px;
+}
+.container .overlay.err .overBox{
+  color: var(--text);
+  background: crimson;
 }
 .container .overlay .overBox img {
   display: block;
   object-fit: contain;
   height: 200px;
-  background: var(--text);
   margin: 1em auto;
 }
 
@@ -147,7 +151,6 @@
 
 .container .overlay .overBox h1 {
   font-size: 4em;
-  color: var(--bg);
   text-align: center;
   margin-bottom: 0.2em;
 }
@@ -181,6 +184,54 @@
   margin-top: 1em;
   cursor: pointer;
   background: var(--primary2);
+}
+
+.container .quest .loadingCont {
+  width: 100%;
+  height: calc(100vh - 12em);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container .quest .loadingCont .loaderExplore {
+  height: 30px;
+  aspect-ratio: 2.5;
+  --_g: no-repeat radial-gradient(farthest-side, var(--primary2) 90%, #0000);
+  background: var(--_g), var(--_g), var(--_g), var(--_g);
+  background-size: 20% 50%;
+  animation: l43 1s infinite linear;
+  margin: 4em auto;
+}
+
+@keyframes l43 {
+  0% {
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
+  }
+  16.67% {
+    background-position: calc(0 * 100% / 3) 0, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
+  }
+  33.33% {
+    background-position: calc(0 * 100% / 3) 100%, calc(1 * 100% / 3) 0,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
+  }
+  50% {
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 100%,
+      calc(2 * 100% / 3) 0, calc(3 * 100% / 3) 50%;
+  }
+  66.67% {
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 100%, calc(3 * 100% / 3) 0;
+  }
+  83.33% {
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 100%;
+  }
+  100% {
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
+  }
 }
 
 /* ************MEDIA QUERRY********************** */
