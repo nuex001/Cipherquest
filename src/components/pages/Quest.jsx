@@ -176,7 +176,7 @@ function Quest() {
             <h1>Congratulations</h1>
             <div className="details">
               <p>
-                You just Won <span>$500</span>
+                You just Won <span>${quest.usdValue}</span>
               </p>
             </div>
             <button onClick={closePopUp}>Cancel</button>
