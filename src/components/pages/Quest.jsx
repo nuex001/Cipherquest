@@ -102,6 +102,13 @@ function Quest() {
         return;
       }
     } catch (error) {
+      if (
+        error?.reason.toString().includes("Creator cannot claim the reward")
+      ) {
+        seterrorStage("Creator cannot claim the reward");
+      } else {
+        setModalMessage("Transaction failed");
+      }
       console.log(error);
     }
   };
