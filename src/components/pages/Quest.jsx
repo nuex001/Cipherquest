@@ -29,9 +29,7 @@ function Quest() {
   const [quest, setQuest] = useState(null);
   const loaderRef = useRef(null);
 
-  const provider = new providers.JsonRpcProvider(
-   import.meta.env.VITE_RPC_URL
-  );
+  const provider = new providers.JsonRpcProvider(import.meta.env.VITE_RPC_URL);
 
   //
   const { data: walletClient } = useWalletClient();
@@ -80,7 +78,9 @@ function Quest() {
     e.preventDefault();
     try {
       if (walletClient) {
-        const hashedAnswer = keccak256(toUtf8Bytes(key));
+        const hashedAnswer = keccak256(
+          toUtf8Bytes(key.toString().toLowerCase())
+        );
         if (hashedAnswer === quest.key) {
           const contract = new ethers.Contract(
             contractAddress,

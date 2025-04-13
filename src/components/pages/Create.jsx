@@ -70,7 +70,7 @@ function Create() {
           subBtnRef.current.disabled = false;
           return;
         }
-        const hashedAnswer = keccak256(toUtf8Bytes(key.tolowerCase()));
+        const hashedAnswer = keccak256(toUtf8Bytes(key.toString().toLowerCase()));
         const { cid } = await uploadToFilebaseIPFS(
           hint,
           `${name}-${Date.now()}`
@@ -107,6 +107,7 @@ function Create() {
         subBtnRef.current.disabled = false;
       }
     } catch (error) {
+      console.log(error);
       subBtnRef.current.disabled = false;
       if (error?.reason.toString().includes("Insufficient")) {
         setModalMessage("Insufficient funds");
