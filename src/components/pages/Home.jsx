@@ -36,7 +36,7 @@ function Home() {
               {text}
               {showLink && (
                 <a
-                  href="#" target="_blank"
+                  href="https://vimeo.com/1075123636?share=copy#t=0" target="_blank"
                   style={{ color: "var(--text)", textDecoration: "underline" }}
                 >
                   Link
