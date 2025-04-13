@@ -130,7 +130,7 @@
   background: var(--text);
   border-radius: 5px;
 }
-.container .overlay.err .overBox{
+.container .overlay.err .overBox {
   color: var(--text);
   background: crimson;
 }
@@ -253,6 +253,7 @@
     gap: 2em;
     /* border: 2px solid #fff; */
     flex-direction: column;
+    padding-bottom: 10em;
   }
   .container .quest .image_display {
     width: 100%;
@@ -280,6 +281,9 @@
   }
   .container .quest .txt_cont p span {
     text-decoration: underline;
+      font-size: 1em;
+      margin-left: 0.5em;
+    }
   }
   .container .quest .txt_cont ul {
     width: 100%;
@@ -330,6 +334,11 @@
   }
   .container .overlay .overBox img {
     height: 150px;
+  }
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* Prevents zoom on focus */
   }
 }
 

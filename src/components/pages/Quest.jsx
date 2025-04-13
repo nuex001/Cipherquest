@@ -11,7 +11,7 @@ import { ethers, providers } from "ethers";
 import { keccak256 } from "@ethersproject/keccak256";
 import { toUtf8Bytes } from "@ethersproject/strings";
 import axios from "axios";
-import { formatSingleData } from "../../utils/utils";
+import { formatSingleData, truncateAddress } from "../../utils/utils";
 import { useNavigate, useParams } from "react-router-dom";
 import { useWalletClient } from "wagmi";
 import { useEthersSigner } from "../../utils/ethers";
@@ -128,7 +128,7 @@ function Quest() {
             <p>{quest.description}</p>
             {!quest.isActive && (
               <p>
-                Quest claimed by <span>{quest.claimedBy}</span>
+                Quest claimed by <span>{truncateAddress(quest.claimedBy)}</span>
               </p>
             )}
             {quest.isActive && (

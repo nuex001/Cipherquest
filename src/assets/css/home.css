@@ -129,7 +129,7 @@
   /* HEADER */
   .container .home header {
     width: 100%;
-    height: calc(100vh - 17vh);
+    height: calc(100vh - 300px);
     /* border: 2px solid var(--text); */
   }
 
