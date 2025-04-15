@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Cipherquest is ReentrancyGuard, Ownable {
     struct Quest {
@@ -12,6 +13,7 @@ contract Cipherquest is ReentrancyGuard, Ownable {
         bytes32 answer; // The correct answer
         uint256 rewardAmount; // Reward for solving the quest
         bool isActive; // Whether the quest is still active
+        address rewardToken;
         address claimedBy;
     }
 
@@ -43,11 +45,29 @@ contract Cipherquest is ReentrancyGuard, Ownable {
     function createQuest(
         string memory _question,
         string memory _hint,
-        bytes32 _answer
+        bytes32 _answer,
+        uint256 _rewardAmount,
+        address _rewardToken
     ) public payable {
+        uint256 _main_RewardAmount;
         require(msg.value >= revenueFees, "Insufficient funds to cover fees.");
 
-        uint256 _rewardAmount = msg.value - revenueFees;
+        // If it's an ERC20 token, transfer it from the sender to this contract
+        if (_rewardToken != address(0)) {
+            require(_rewardAmount > 0, "Reward must be > 0");
+            require(
+                IERC20(_rewardToken).transferFrom(
+                    msg.sender,
+                    address(this),
+                    _rewardAmount
+                ),
+                "Token transfer failed"
+            );
+            _main_RewardAmount = _rewardAmount; // Set the reward amount for tokens
+        } else {
+            _main_RewardAmount = msg.value - revenueFees;
+        }
+
         revenue += revenueFees;
         questCount++; // Increment the quest ID
         quests[questCount] = Quest({
@@ -56,8 +76,9 @@ contract Cipherquest is ReentrancyGuard, Ownable {
             question: _question,
             answer: _answer,
             hint: _hint,
-            rewardAmount: _rewardAmount,
+            rewardAmount: _main_RewardAmount,
             isActive: true,
+            rewardToken: _rewardToken,
             claimedBy: address(0)
         });
 
@@ -70,18 +91,30 @@ contract Cipherquest is ReentrancyGuard, Ownable {
         payable
         nonReentrant
     {
-        require(msg.sender != quests[_questId].creator, "Creator cannot claim the reward.");
+        Quest storage quest = quests[_questId];
 
-        require(quests[_questId].isActive, "Quest is no longer active.");
+        require(msg.sender != quest.creator, "Creator cannot claim the reward");
+        require(quest.isActive, "Quest is not active");
+        require(_answer == quest.answer, "Wrong answer");
 
-        require(_answer == quests[_questId].answer, "Wrong answer");
+        quest.isActive = false;
+        quest.claimedBy = msg.sender;
+        hasClaimed[msg.sender][_questId] = true;
 
-        // If the answer is correct, reward the user
-        payable(msg.sender).transfer(quests[_questId].rewardAmount); // Reward the user with ETH
-        hasClaimed[msg.sender][_questId] = true; // Mark as claimed
-        quests[_questId].isActive = false;
-        quests[_questId].claimedBy = msg.sender;
-        emit RewardClaimed(msg.sender, _questId, quests[_questId].rewardAmount);
+        // Transfer reward
+        if (quest.rewardToken == address(0)) {
+            payable(msg.sender).transfer(quest.rewardAmount);
+        } else {
+            require(
+                IERC20(quest.rewardToken).transfer(
+                    msg.sender,
+                    quest.rewardAmount
+                ),
+                "Token reward transfer failed"
+            );
+        }
+
+        emit RewardClaimed(msg.sender, _questId, quest.rewardAmount);
         emit AnswerSubmitted(msg.sender, _questId, true);
     }
 
@@ -190,6 +223,7 @@ contract Cipherquest is ReentrancyGuard, Ownable {
     function getQuest(uint256 _questId) external view returns (Quest memory) {
         return quests[_questId];
     }
+
     // Function to get the answer for a specific quest (only creator or user who submitted)
     function getAnswer(uint256 _questId) external view returns (bytes32) {
         return quests[_questId].answer;
@@ -198,5 +232,9 @@ contract Cipherquest is ReentrancyGuard, Ownable {
     //
     function renounceOwnership() public view override onlyOwner {
         revert("Renouncing ownership is disabled");
+    }
+
+    receive() external payable {
+        revenue += msg.value;
     }
 }
