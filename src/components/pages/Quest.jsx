@@ -79,7 +79,10 @@ function Quest() {
     try {
       if (walletClient) {
         const hashedAnswer = keccak256(
-          toUtf8Bytes(key.toString().toLowerCase())
+          toUtf8Bytes(
+            import.meta.env.VITE_PROJECTSALT,
+            key.toString().toLowerCase()
+          )
         );
         if (hashedAnswer === quest.key) {
           const contract = new ethers.Contract(
@@ -128,7 +131,19 @@ function Quest() {
             <ul>
               <li className="coin">
                 {quest.amount}
-                <img src={eth} alt="eth" />
+                {quest.rewardToken ===
+                "0x0000000000000000000000000000000000000000" ? (
+                  <img src={eth} alt="eth" />
+                ) : (
+                  // <img
+                  //   src={`https://dd.dexscreener.com/ds-data/tokens/base/${quest.rewardToken}.png`}
+                  //   alt="token"
+                  // />
+                  <img
+                    src={`https://dd.dexscreener.com/ds-data/tokens/base/0xF73978B3A7D1d4974abAE11f696c1b4408c027A0.png`}
+                    alt="token"
+                  />
+                )}
               </li>
               <li>${quest.usdValue}</li>
             </ul>

@@ -1,4 +1,4 @@
-export const contractAddress = "0x62cE3E51E090425A6c4F219829005b9f4D8C06Ec";
+export const contractAddress = "0x99756517473A6f290D96E0cD594C907814841208";
 export const ContractABI = [
   {
     inputs: [
@@ -141,6 +141,16 @@ export const ContractABI = [
         name: "_answer",
         type: "bytes32",
       },
+      {
+        internalType: "uint256",
+        name: "_rewardAmount",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_rewardToken",
+        type: "address",
+      },
     ],
     name: "createQuest",
     outputs: [],
@@ -220,6 +230,11 @@ export const ContractABI = [
           },
           {
             internalType: "address",
+            name: "rewardToken",
+            type: "address",
+          },
+          {
+            internalType: "address",
             name: "claimedBy",
             type: "address",
           },
@@ -286,6 +301,11 @@ export const ContractABI = [
           },
           {
             internalType: "address",
+            name: "rewardToken",
+            type: "address",
+          },
+          {
+            internalType: "address",
             name: "claimedBy",
             type: "address",
           },
@@ -344,6 +364,11 @@ export const ContractABI = [
             internalType: "bool",
             name: "isActive",
             type: "bool",
+          },
+          {
+            internalType: "address",
+            name: "rewardToken",
+            type: "address",
           },
           {
             internalType: "address",
@@ -410,6 +435,11 @@ export const ContractABI = [
             internalType: "bool",
             name: "isActive",
             type: "bool",
+          },
+          {
+            internalType: "address",
+            name: "rewardToken",
+            type: "address",
           },
           {
             internalType: "address",
@@ -522,6 +552,11 @@ export const ContractABI = [
       },
       {
         internalType: "address",
+        name: "rewardToken",
+        type: "address",
+      },
+      {
+        internalType: "address",
         name: "claimedBy",
         type: "address",
       },
@@ -613,4 +648,12 @@ export const ContractABI = [
     stateMutability: "nonpayable",
     type: "function",
   },
+  {
+    stateMutability: "payable",
+    type: "receive",
+  },
+];
+export const ERC20ABI = [
+  "function approve(address spender, uint256 amount) public returns (bool)",
+  "function decimals() view returns (uint8)",
 ];

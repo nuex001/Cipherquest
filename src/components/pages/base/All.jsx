@@ -7,7 +7,7 @@ import eth from "../../../assets/images/eth.svg";
 import { ContractABI, contractAddress } from "../../../utils/Constatnt";
 import { ethers, providers } from "ethers";
 import axios from "axios";
-import { formatData } from "../../../utils/utils";
+import { formatData, formatNumberWithSuffix } from "../../../utils/utils";
 
 function All() {
   const [page, setPage] = useState(0); // you can use this to paginate manually if needed
@@ -17,9 +17,7 @@ function All() {
   const [quests, setQuests] = useState([]);
   const loaderRef = useRef(null);
 
-  const provider = new providers.JsonRpcProvider(
-   import.meta.env.VITE_RPC_URL
-  );
+  const provider = new providers.JsonRpcProvider(import.meta.env.VITE_RPC_URL);
 
   const fetchQuests = async () => {
     try {
@@ -30,7 +28,7 @@ function All() {
         provider
       );
       const tx = await contract.getQuests(page, page + 10); // offset-based
-      // console.log(tx);
+      console.log(tx);
       const metadataList = await formatData(tx);
       // console.log(metadataList);
 
@@ -85,10 +83,22 @@ function All() {
             <div className="txtCont">
               <h3>{quest.name}</h3>
               <ul>
-                <li>${quest.usdValue}</li>
+                <li>${formatNumberWithSuffix(quest.usdValue)}</li>
                 <li className="coin">
-                  <img src={eth} alt="eth" />
-                  {quest.amount}
+                  {quest.rewardToken ===
+                  "0x0000000000000000000000000000000000000000" ? (
+                    <img src={eth} alt="eth" />
+                  ) : (
+                    // <img
+                    //   src={`https://dd.dexscreener.com/ds-data/tokens/base/${quest.rewardToken}.png`}
+                    //   alt="token"
+                    // />
+                    <img
+                      src={`https://dd.dexscreener.com/ds-data/tokens/base/0xF73978B3A7D1d4974abAE11f696c1b4408c027A0.png`}
+                      alt="token"
+                    />
+                  )}
+                  {formatNumberWithSuffix(quest.amount)}
                 </li>
               </ul>
               <p>{quest.description}</p>

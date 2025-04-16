@@ -34,17 +34,17 @@
 }
 .container .create form .rows input {
   width: 100%;
-  height: 45px;
+  height: 50px;
   font-size: 1.4em;
   padding: 0em 1em;
   color: var(--text);
   background: transparent;
   border: 0.5px solid var(--primary2);
   outline: none;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 .container .create form .rows span {
-  color: var(--primary2);
+  color: crimson;
   font-family: "Onest", sans-serif;
   font-size: 1.4em;
   letter-spacing: -0.5px;
@@ -59,10 +59,17 @@
   background: transparent;
   border: 0.5px solid var(--primary2);
   outline: none;
-  border-radius: 2px;
+  border-radius: 4px;
   resize: none;
 }
-
+.container .create form .btns {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
 .container .create form button {
   display: flex;
   height: 50px;
@@ -72,31 +79,22 @@
   padding: 0em 2em;
   border-radius: 5px;
   color: var(--text);
-  background: var(--primary2);
-  font-family: "Myfonts2", sans-serif;
-  border: none;
-  outline: none;
-}
-.container .create form button:hover {
-  animation: shake 0.5s; /* Duration of shake animation */
-  animation-iteration-count: 5;
-}
-
-.container .create form button {
-  display: flex;
-  height: 50px;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.4em;
-  padding: 0em 2em;
-  border-radius: 5px;
-  color: var(--text);
-  background: var(--primary2);
+  background: var(--header);
   font-family: "Myfonts2", sans-serif;
   border: none;
   outline: none;
   cursor: pointer;
 }
+.container .create form button:hover {
+  background: var(--header);
+}
+
+.container .create form button.inactive {
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/*  */
 .container .create .modal_cont {
   width: 100%;
   height: 100%;
@@ -166,8 +164,6 @@
     font-size: 16px; /* Prevents zoom on focus */
   }
   .container .create form .rows span {
-    color: var(--primary2);
-    font-family: "Onest", sans-serif;
     font-size: 1.4em;
     letter-spacing: -0.5px;
     text-align: left;

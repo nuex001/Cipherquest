@@ -103,8 +103,6 @@
   margin-top: 2em;
 }
 
-.container .explore .child main .emptyCont {
-}
 .container .explore .child main .emptyCont img {
   object-fit: contain;
   width: 350px;
@@ -145,12 +143,13 @@
   width: 45%;
   height: auto;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 2.5em 0em;
   padding-right: 2em;
   border-radius: 5px;
   color: var(--text);
   background: var(--primary2);
+  /* border: 2px solid #fff; */
 }
 
 .container .explore .child main .rows .box .imageContainer {

@@ -7,7 +7,7 @@ import eth from "../../../assets/images/eth.svg";
 import { ContractABI, contractAddress } from "../../../utils/Constatnt";
 import { ethers, providers } from "ethers";
 import axios from "axios";
-import { formatData } from "../../../utils/utils";
+import { formatData, formatNumberWithSuffix } from "../../../utils/utils";
 
 function Ended() {
   const [page, setPage] = useState(0); // you can use this to paginate manually if needed
@@ -71,49 +71,61 @@ function Ended() {
   }, [loading]);
 
   return (
-    <div className="rows">
-      {quests &&
-        quests.map((quest, index) => (
-          <div className="box" key={index}>
-            <div className="imageContainer">
-              {quest.isActive ? (
-                <img src={one} alt="" />
-              ) : (
-                <img src={three} alt="" />
-              )}
-            </div>
-            <div className="txtCont">
-              <h3>{quest.name}</h3>
-              <ul>
-                <li>${quest.usdValue}</li>
-                <li className="coin">
-                  <img src={eth} alt="eth" />
-                  {quest.amount}
-                </li>
-              </ul>
-              <p>{quest.description}</p>
-              {!quest.isActive ? (
-                <Link to={`/quest/${quest.questId}`} className="btn active">
-                  Claimed
-                </Link>
-              ) : (
-                <Link to={`/quest/${quest.questId}`} className="btn">
-                  Explore
-                </Link>
-              )}
-            </div>
-          </div>
-        ))}
-      {isEmpty && (
-        <div className="emptyCont">
-          <img src={two} alt="" />
-          <h2>No quest Available</h2>
-        </div>
-      )}
-      {loading && (
-        <div ref={loaderRef} className={"loaderExplore active"}></div>
-      )}
-    </div>
+     <div className="rows">
+         {quests &&
+           quests.map((quest, index) => (
+             <div className="box" key={index}>
+               <div className="imageContainer">
+                 {quest.isActive ? (
+                   <img src={one} alt="" />
+                 ) : (
+                   <img src={three} alt="" />
+                 )}
+               </div>
+               <div className="txtCont">
+                 <h3>{quest.name}</h3>
+                 <ul>
+                   <li>${formatNumberWithSuffix(quest.usdValue)}</li>
+                   <li className="coin">
+                     {quest.rewardToken ===
+                     "0x0000000000000000000000000000000000000000" ? (
+                       <img src={eth} alt="eth" />
+                     ) : (
+                       // <img
+                       //   src={`https://dd.dexscreener.com/ds-data/tokens/base/${quest.rewardToken}.png`}
+                       //   alt="token"
+                       // />
+                       <img
+                         src={`https://dd.dexscreener.com/ds-data/tokens/base/0xF73978B3A7D1d4974abAE11f696c1b4408c027A0.png`}
+                         alt="token"
+                       />
+                     )}
+                     {formatNumberWithSuffix(quest.amount)}
+                   </li>
+                 </ul>
+                 <p>{quest.description}</p>
+                 {!quest.isActive ? (
+                   <Link to={`/quest/${quest.questId}`} className="btn active">
+                     Claimed
+                   </Link>
+                 ) : (
+                   <Link to={`/quest/${quest.questId}`} className="btn">
+                     Explore
+                   </Link>
+                 )}
+               </div>
+             </div>
+           ))}
+         {isEmpty && (
+           <div className="emptyCont">
+             <img src={two} alt="" />
+             <h2>No quest Available</h2>
+           </div>
+         )}
+         {loading && (
+           <div ref={loaderRef} className={"loaderExplore active"}></div>
+         )}
+       </div>
   );
 }
 
