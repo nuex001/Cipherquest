@@ -1,12 +1,16 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+pragma solidity 0.8.20;
+
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract Cipherquest is ReentrancyGuard, Ownable {
+    using SafeERC20 for IERC20;
+
     struct Quest {
-        uint256 questId; // The address of the user who created the quest
+        uint256 questId; // Unique quest ID
         address creator; // The address of the user who created the quest
         string question; // The question for the quest
         string hint; // The correct answer
@@ -19,26 +23,34 @@ contract Cipherquest is ReentrancyGuard, Ownable {
 
     mapping(uint256 => Quest) public quests; // Mapping to store quests by an ID
     mapping(address => mapping(uint256 => bool)) public hasClaimed; // Track who has claimed for a specific quest
+    mapping(address => bool) public tokenWhitelist;
     uint256 public questCount; // Count to assign unique IDs to quests
     uint256 public revenue; // Count to assign unique IDs to quests
     uint256 public revenueFees; // This can be updated by the admin
 
-    event QuestCreated(
-        uint256 questId,
-        address creator,
-        string question,
-        uint256 rewardAmount
-    );
-    event AnswerSubmitted(
-        address indexed user,
-        uint256 questId,
-        bool isCorrect
-    );
+    event TokenWhitelisted(address token);
+    event TokenRemovedFromWhitelist(address token);
+    event QuestCancelled(uint256 questId, address cancelledBy);
+
+    event QuestCreated(uint256 questId, address creator, string question, uint256 rewardAmount);
+    event AnswerSubmitted(address indexed user, uint256 questId, bool isCorrect);
     event RewardClaimed(address indexed user, uint256 questId, uint256 amount);
     event RevenueFeeUpdated(uint256 newFee);
 
-    constructor(uint256 _revenueFees) Ownable() {
+    constructor(uint256 _revenueFees) Ownable(msg.sender) {
         revenueFees = _revenueFees;
+    }
+
+    function addTokenToWhitelist(address token) external onlyOwner {
+        require(token != address(0), "Zero address");
+        tokenWhitelist[token] = true;
+        emit TokenWhitelisted(token);
+    }
+
+    function removeTokenFromWhitelist(address token) external onlyOwner {
+        require(tokenWhitelist[token], "Not whitelisted");
+        tokenWhitelist[token] = false;
+        emit TokenRemovedFromWhitelist(token);
     }
 
     // Function to create a new quest
@@ -49,20 +61,14 @@ contract Cipherquest is ReentrancyGuard, Ownable {
         uint256 _rewardAmount,
         address _rewardToken
     ) public payable {
-        uint256 _main_RewardAmount;
         require(msg.value >= revenueFees, "Insufficient funds to cover fees.");
+        uint256 _main_RewardAmount;
 
         // If it's an ERC20 token, transfer it from the sender to this contract
         if (_rewardToken != address(0)) {
+            require(tokenWhitelist[_rewardToken], "Token not whitelisted");
             require(_rewardAmount > 0, "Reward must be > 0");
-            require(
-                IERC20(_rewardToken).transferFrom(
-                    msg.sender,
-                    address(this),
-                    _rewardAmount
-                ),
-                "Token transfer failed"
-            );
+            IERC20(_rewardToken).safeTransferFrom(msg.sender, address(this), _rewardAmount);
             _main_RewardAmount = _rewardAmount; // Set the reward amount for tokens
         } else {
             _main_RewardAmount = msg.value - revenueFees;
@@ -82,15 +88,29 @@ contract Cipherquest is ReentrancyGuard, Ownable {
             claimedBy: address(0)
         });
 
-        emit QuestCreated(questCount, msg.sender, _question, _rewardAmount);
+        emit QuestCreated(questCount, msg.sender, _question, _main_RewardAmount);
+    }
+
+    function cancelQuest(uint256 questId) external nonReentrant {
+        Quest storage quest = quests[questId];
+        require(msg.sender == quest.creator, "Not the creator");
+        require(quest.isActive, "Quest inactive");
+        require(quest.claimedBy == address(0), "Already claimed");
+
+        quest.isActive = false;
+
+        if (quest.rewardToken == address(0)) {
+            payable(msg.sender).transfer(quest.rewardAmount);
+        } else {
+            // SafeERC20 call
+            IERC20(quest.rewardToken).safeTransfer(msg.sender, quest.rewardAmount);
+        }
+
+        emit QuestCancelled(questId, msg.sender);
     }
 
     // Function to submit an answer to a quest
-    function submitAnswer(uint256 _questId, bytes32 _answer)
-        public
-        payable
-        nonReentrant
-    {
+    function submitAnswer(uint256 _questId, bytes32 _answer) public payable nonReentrant {
         Quest storage quest = quests[_questId];
 
         require(msg.sender != quest.creator, "Creator cannot claim the reward");
@@ -105,13 +125,7 @@ contract Cipherquest is ReentrancyGuard, Ownable {
         if (quest.rewardToken == address(0)) {
             payable(msg.sender).transfer(quest.rewardAmount);
         } else {
-            require(
-                IERC20(quest.rewardToken).transfer(
-                    msg.sender,
-                    quest.rewardAmount
-                ),
-                "Token reward transfer failed"
-            );
+            IERC20(quest.rewardToken).safeTransfer(msg.sender, quest.rewardAmount);
         }
 
         emit RewardClaimed(msg.sender, _questId, quest.rewardAmount);
@@ -132,11 +146,7 @@ contract Cipherquest is ReentrancyGuard, Ownable {
     }
 
     // Get all quests with pagination (start, end)
-    function getQuests(uint256 start, uint256 end)
-        external
-        view
-        returns (Quest[] memory)
-    {
+    function getQuests(uint256 start, uint256 end) external view returns (Quest[] memory) {
         require(start < questCount, "Start index out of bounds");
         if (end > questCount) {
             end = questCount; // Clamp end to the total number of quests
@@ -152,11 +162,7 @@ contract Cipherquest is ReentrancyGuard, Ownable {
     }
 
     // Get open (active) quests with pagination
-    function getOpenQuests(uint256 start, uint256 end)
-        external
-        view
-        returns (Quest[] memory)
-    {
+    function getOpenQuests(uint256 start, uint256 end) external view returns (Quest[] memory) {
         uint256 count = 0;
         for (uint256 i = 1; i <= questCount; i++) {
             if (quests[i].isActive) {
@@ -186,11 +192,7 @@ contract Cipherquest is ReentrancyGuard, Ownable {
     }
 
     // Get ended (inactive) quests with pagination
-    function getEndedQuests(uint256 start, uint256 end)
-        external
-        view
-        returns (Quest[] memory)
-    {
+    function getEndedQuests(uint256 start, uint256 end) external view returns (Quest[] memory) {
         uint256 count = 0;
         for (uint256 i = 1; i <= questCount; i++) {
             if (!quests[i].isActive) {
