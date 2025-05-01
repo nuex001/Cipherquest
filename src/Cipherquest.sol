@@ -19,6 +19,7 @@ contract Cipherquest is ReentrancyGuard, Ownable {
         bool isActive; // Whether the quest is still active
         address rewardToken;
         address claimedBy;
+        uint256 createdAt;
     }
 
     mapping(uint256 => Quest) public quests; // Mapping to store quests by an ID
@@ -85,7 +86,8 @@ contract Cipherquest is ReentrancyGuard, Ownable {
             rewardAmount: _main_RewardAmount,
             isActive: true,
             rewardToken: _rewardToken,
-            claimedBy: address(0)
+            claimedBy: address(0),
+            createdAt: block.timestamp
         });
 
         emit QuestCreated(questCount, msg.sender, _question, _main_RewardAmount);
@@ -96,6 +98,7 @@ contract Cipherquest is ReentrancyGuard, Ownable {
         require(msg.sender == quest.creator, "Not the creator");
         require(quest.isActive, "Quest inactive");
         require(quest.claimedBy == address(0), "Already claimed");
+        require(block.timestamp >= quest.createdAt + 30 days, "30 days not passed");
 
         quest.isActive = false;
 
