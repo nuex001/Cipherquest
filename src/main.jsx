@@ -23,7 +23,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 const config = getDefaultConfig({
   appName: "Cipherquest",
   projectId: import.meta.env.VITE_PROJECTID,
-  chains: [baseSepolia],
+  chains: [base],
 });
 const queryClient = new QueryClient();
 
