@@ -221,7 +221,7 @@ function Create() {
                 id="name"
                 name="name"
                 className="int"
-                placeholder="Hunt name.."
+                placeholder="Hunt title.."
                 value={name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
@@ -235,7 +235,7 @@ function Create() {
                 id="key"
                 name="key"
                 className="int"
-                placeholder="Hunt key.."
+                placeholder="Answer.."
                 value={key}
                 onChange={(e) =>
                   setFormData({ ...formData, key: e.target.value })
@@ -247,7 +247,7 @@ function Create() {
               <textarea
                 name="hint"
                 id="hint"
-                placeholder="Hint"
+                placeholder="Hint to get the answer.."
                 value={hint}
                 onChange={(e) =>
                   setFormData({ ...formData, hint: e.target.value })
