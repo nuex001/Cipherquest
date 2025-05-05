@@ -190,3 +190,24 @@ export function truncateAddress(address) {
   if (!address) return "";
   return address.slice(0, 8) + "..." + address.slice(-6);
 }
+
+export const style = {
+  control: (base) => ({
+    ...base,
+    backgroundColor: "var(--bg)",
+    color: "var(--text)",
+    height:"50px",
+    borderColor: "var(--primary2)",
+    outline: "none",
+    borderStyle: "dotted",
+    cursor: "pointer",
+  }),
+  singleValue: (provided) => ({ ...provided, color: "var(--text)" }),
+  menu: (provided) => ({ ...provided, backgroundColor: "var(--bg)" }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? "var(--bg)" : "var(--bg)",
+    color: "var(--text)",
+    "&:hover": { backgroundColor: "var(--primary2)" },
+  }),
+};

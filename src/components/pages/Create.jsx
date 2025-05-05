@@ -3,6 +3,7 @@ import "../../assets/css/create.css";
 import Modal from "../layouts/Modal";
 import { keccak256 } from "@ethersproject/keccak256";
 import { toUtf8Bytes } from "@ethersproject/strings";
+import Select from "react-select";
 
 import axios from "axios";
 import { Buffer } from "buffer";
@@ -14,6 +15,7 @@ import {
 } from "../../utils/Constatnt.js";
 import { useWalletClient } from "wagmi";
 import { ethers, providers } from "ethers";
+import { style } from "../../utils/utils.js";
 
 function Create() {
   const [modalMessage, setModalMessage] = useState(null);
@@ -107,7 +109,6 @@ function Create() {
           import.meta.env.VITE_PROJECTSALT + key.toString().toLowerCase()
         )
       );
-      
 
       console.log(`TEXT HASH : ${cid}`);
       console.log(`KEY HASH : ${hashedAnswer}`);
@@ -176,10 +177,14 @@ function Create() {
       subBtnRef.current.disabled = false;
 
       const msg = error?.reason?.toString() || error?.data?.message || "";
+      console.log(msg);
+
       if (msg.includes("Insufficient") || msg.includes("insufficient funds")) {
         setModalMessage("Insufficient funds");
       } else if (msg.includes("User denied transaction")) {
         setModalMessage("Transaction rejected");
+      } else if (msg.includes("whitelisted")) {
+        setModalMessage("Token not whitelisted");
       } else if (msg.includes("reverted")) {
         setModalMessage("Transaction reverted");
       } else {
@@ -190,17 +195,33 @@ function Create() {
     }
   };
 
+  const techOptions = [
+    {
+      label: "Everybody needs base(ENB)",
+      value: "0x5B1519E41b3648FFa3F83b2a20661EfC2ff9100D",
+      image:
+        "https://dd.dexscreener.com/ds-data/tokens/base/0xF73978B3A7D1d4974abAE11f696c1b4408c027A0.png",
+    },
+    {
+      label: "Everybody needs base(ENB)",
+      value: "0x5B1519E41b3648FFa3F83b2a20661EfC2ff9100D",
+      image:
+        "https://dd.dexscreener.com/ds-data/tokens/base/0xF73978B3A7D1d4974abAE11f696c1b4408c027A0.png",
+    },
+  ];
+
   return (
     <div className="create">
       <form action="" onSubmit={onsubmit} ref={formRef}>
         {stage === 0 ? (
           <>
             <div className="rows">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">Title</label>
               <input
                 type="text"
                 id="name"
                 name="name"
+                className="int"
                 placeholder="Hunt name.."
                 value={name}
                 onChange={(e) =>
@@ -214,6 +235,7 @@ function Create() {
                 type="text"
                 id="key"
                 name="key"
+                className="int"
                 placeholder="Hunt key.."
                 value={key}
                 onChange={(e) =>
@@ -237,6 +259,35 @@ function Create() {
         ) : (
           <>
             <div className="rows">
+              <label htmlFor="token">Reward Token</label>
+              <Select
+                options={techOptions}
+                id="token"
+                name="rewardToken"
+                className="selectInput"
+                styles={style}
+                placeholder="- SELECT TOKEN -"
+                onChange={(selectedOption) =>
+                  setFormData({
+                    ...formData,
+                    rewardToken: selectedOption.value,
+                  })
+                }
+                getOptionLabel={(e) => (
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: 8 }}
+                  >
+                    <img
+                      src={e.image}
+                      alt={e.label}
+                      style={{ width: 20, height: 20 }}
+                    />
+                    {e.label}
+                  </div>
+                )}
+              />
+            </div>
+            {/* <div className="rows">
               <label htmlFor="rewardToken">Token Address</label>
               <input
                 type="text"
@@ -249,20 +300,21 @@ function Create() {
                 }
               />
               <span>If reward is Native Eth, leave this Input empty.</span>
-            </div>
+            </div> */}
             <div className="rows">
               <label htmlFor="amount">Amount</label>
               <input
                 type="tel"
                 id="amount"
                 name="amount"
+                className="int"
                 placeholder="0"
                 value={amount}
                 onChange={(e) =>
                   setFormData({ ...formData, amount: e.target.value })
                 }
               />
-              <span>Creating a quest costs 0.002 ETH.</span>
+              <span>Creating a quest costs 0.001 ETH.</span>
             </div>
           </>
         )}

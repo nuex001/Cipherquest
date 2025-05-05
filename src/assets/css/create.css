@@ -28,11 +28,13 @@
   /* border: 2px solid var(--text); */
 }
 .container .create form .rows label {
+  font-family: "Onest", sans-serif;
   text-align: left;
   color: var(--text);
   font-size: 2em;
+  letter-spacing: -1px;
 }
-.container .create form .rows input {
+.container .create form .rows input.int {
   width: 100%;
   height: 50px;
   font-size: 1.4em;
@@ -40,8 +42,15 @@
   color: var(--text);
   background: transparent;
   border: 0.5px solid var(--primary2);
+  border-style: dotted;
   outline: none;
   border-radius: 4px;
+}
+.container .create form .rows .selectInput {
+  width: 100%;
+  font-size: 1.4em;
+  font-family: "Onest", sans-serif;
+  cursor: pointer;
 }
 .container .create form .rows span {
   color: crimson;
@@ -58,6 +67,7 @@
   color: var(--text);
   background: transparent;
   border: 0.5px solid var(--primary2);
+  border-style: dotted;
   outline: none;
   border-radius: 4px;
   resize: none;

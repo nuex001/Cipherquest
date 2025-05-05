@@ -78,12 +78,13 @@ function Quest() {
     e.preventDefault();
     try {
       if (walletClient) {
+        const txt = key.toString().toLowerCase();
+        console.log(txt);
+
         const hashedAnswer = keccak256(
-          toUtf8Bytes(
-            import.meta.env.VITE_PROJECTSALT,
-            key.toString().toLowerCase()
-          )
+          toUtf8Bytes(import.meta.env.VITE_PROJECTSALT + txt)
         );
+
         if (hashedAnswer === quest.key) {
           const contract = new ethers.Contract(
             contractAddress,
@@ -105,6 +106,7 @@ function Quest() {
         return;
       }
     } catch (error) {
+      // console.log(error);
       if (
         error?.reason.toString().includes("Creator cannot claim the reward")
       ) {
