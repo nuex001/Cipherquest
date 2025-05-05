@@ -229,7 +229,7 @@ function Create() {
               />
             </div>
             <div className="rows">
-              <label htmlFor="key">Key</label>
+              <label htmlFor="key">Answer</label>
               <input
                 type="text"
                 id="key"
