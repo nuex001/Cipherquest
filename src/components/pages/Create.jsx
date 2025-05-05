@@ -197,10 +197,9 @@ function Create() {
 
   const techOptions = [
     {
-      label: "Everybody needs base(ENB)",
-      value: "0x5B1519E41b3648FFa3F83b2a20661EfC2ff9100D",
-      image:
-        "https://dd.dexscreener.com/ds-data/tokens/base/0xF73978B3A7D1d4974abAE11f696c1b4408c027A0.png",
+      label: "Token USDC (USDC)",
+      value: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      image: "https://basescan.org/token/images/centre-usdc_28.png",
     },
     {
       label: "Everybody needs base(ENB)",

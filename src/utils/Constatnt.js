@@ -1,785 +1,785 @@
-export const contractAddress = "0xe6d358CfbAd3ADB3462f67459FE7A109f1885678";
+export const contractAddress = "0x3788AbC00749Dd3722d693CB5F78Fe5ed17D9742";
 export const ContractABI = [
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_revenueFees",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "_revenueFees",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    stateMutability: "nonpayable",
+    type: "constructor",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "questId",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "questId",
+        type: "uint256",
       },
       {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "isCorrect",
-        "type": "bool"
-      }
+        indexed: false,
+        internalType: "bool",
+        name: "isCorrect",
+        type: "bool",
+      },
     ],
-    "name": "AnswerSubmitted",
-    "type": "event"
+    name: "AnswerSubmitted",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "previousOwner",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
       },
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
-    "name": "OwnershipTransferred",
-    "type": "event"
+    name: "OwnershipTransferred",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "questId",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "questId",
+        type: "uint256",
       },
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "cancelledBy",
-        "type": "address"
-      }
+        indexed: false,
+        internalType: "address",
+        name: "cancelledBy",
+        type: "address",
+      },
     ],
-    "name": "QuestCancelled",
-    "type": "event"
+    name: "QuestCancelled",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "questId",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "questId",
+        type: "uint256",
       },
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "creator",
-        "type": "address"
+        indexed: false,
+        internalType: "address",
+        name: "creator",
+        type: "address",
       },
       {
-        "indexed": false,
-        "internalType": "string",
-        "name": "question",
-        "type": "string"
+        indexed: false,
+        internalType: "string",
+        name: "question",
+        type: "string",
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "rewardAmount",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: "uint256",
+        name: "rewardAmount",
+        type: "uint256",
+      },
     ],
-    "name": "QuestCreated",
-    "type": "event"
+    name: "QuestCreated",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newFee",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: "uint256",
+        name: "newFee",
+        type: "uint256",
+      },
     ],
-    "name": "RevenueFeeUpdated",
-    "type": "event"
+    name: "RevenueFeeUpdated",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "questId",
-        "type": "uint256"
+        indexed: false,
+        internalType: "uint256",
+        name: "questId",
+        type: "uint256",
       },
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
     ],
-    "name": "RewardClaimed",
-    "type": "event"
+    name: "RewardClaimed",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
+        indexed: false,
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
     ],
-    "name": "TokenRemovedFromWhitelist",
-    "type": "event"
+    name: "TokenRemovedFromWhitelist",
+    type: "event",
   },
   {
-    "anonymous": false,
-    "inputs": [
+    anonymous: false,
+    inputs: [
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
+        indexed: false,
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
     ],
-    "name": "TokenWhitelisted",
-    "type": "event"
+    name: "TokenWhitelisted",
+    type: "event",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
     ],
-    "name": "addTokenToWhitelist",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "addTokenToWhitelist",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "questId",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "questId",
+        type: "uint256",
+      },
     ],
-    "name": "cancelQuest",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "cancelQuest",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "string",
-        "name": "_question",
-        "type": "string"
+        internalType: "string",
+        name: "_question",
+        type: "string",
       },
       {
-        "internalType": "string",
-        "name": "_hint",
-        "type": "string"
+        internalType: "string",
+        name: "_hint",
+        type: "string",
       },
       {
-        "internalType": "bytes32",
-        "name": "_answer",
-        "type": "bytes32"
+        internalType: "bytes32",
+        name: "_answer",
+        type: "bytes32",
       },
       {
-        "internalType": "uint256",
-        "name": "_rewardAmount",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "_rewardAmount",
+        type: "uint256",
       },
       {
-        "internalType": "address",
-        "name": "_rewardToken",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "_rewardToken",
+        type: "address",
+      },
     ],
-    "name": "createQuest",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
+    name: "createQuest",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_questId",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "_questId",
+        type: "uint256",
+      },
     ],
-    "name": "getAnswer",
-    "outputs": [
+    name: "getAnswer",
+    outputs: [
       {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
-      }
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "start",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "start",
+        type: "uint256",
       },
       {
-        "internalType": "uint256",
-        "name": "end",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "end",
+        type: "uint256",
+      },
     ],
-    "name": "getEndedQuests",
-    "outputs": [
+    name: "getEndedQuests",
+    outputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "questId",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "questId",
+            type: "uint256",
           },
           {
-            "internalType": "address",
-            "name": "creator",
-            "type": "address"
+            internalType: "address",
+            name: "creator",
+            type: "address",
           },
           {
-            "internalType": "string",
-            "name": "question",
-            "type": "string"
+            internalType: "string",
+            name: "question",
+            type: "string",
           },
           {
-            "internalType": "string",
-            "name": "hint",
-            "type": "string"
+            internalType: "string",
+            name: "hint",
+            type: "string",
           },
           {
-            "internalType": "bytes32",
-            "name": "answer",
-            "type": "bytes32"
+            internalType: "bytes32",
+            name: "answer",
+            type: "bytes32",
           },
           {
-            "internalType": "uint256",
-            "name": "rewardAmount",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "rewardAmount",
+            type: "uint256",
           },
           {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
+            internalType: "bool",
+            name: "isActive",
+            type: "bool",
           },
           {
-            "internalType": "address",
-            "name": "rewardToken",
-            "type": "address"
+            internalType: "address",
+            name: "rewardToken",
+            type: "address",
           },
           {
-            "internalType": "address",
-            "name": "claimedBy",
-            "type": "address"
+            internalType: "address",
+            name: "claimedBy",
+            type: "address",
           },
           {
-            "internalType": "uint256",
-            "name": "createdAt",
-            "type": "uint256"
-          }
+            internalType: "uint256",
+            name: "createdAt",
+            type: "uint256",
+          },
         ],
-        "internalType": "struct Cipherquest.Quest[]",
-        "name": "",
-        "type": "tuple[]"
-      }
+        internalType: "struct Cipherquest.Quest[]",
+        name: "",
+        type: "tuple[]",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "start",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "start",
+        type: "uint256",
       },
       {
-        "internalType": "uint256",
-        "name": "end",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "end",
+        type: "uint256",
+      },
     ],
-    "name": "getOpenQuests",
-    "outputs": [
+    name: "getOpenQuests",
+    outputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "questId",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "questId",
+            type: "uint256",
           },
           {
-            "internalType": "address",
-            "name": "creator",
-            "type": "address"
+            internalType: "address",
+            name: "creator",
+            type: "address",
           },
           {
-            "internalType": "string",
-            "name": "question",
-            "type": "string"
+            internalType: "string",
+            name: "question",
+            type: "string",
           },
           {
-            "internalType": "string",
-            "name": "hint",
-            "type": "string"
+            internalType: "string",
+            name: "hint",
+            type: "string",
           },
           {
-            "internalType": "bytes32",
-            "name": "answer",
-            "type": "bytes32"
+            internalType: "bytes32",
+            name: "answer",
+            type: "bytes32",
           },
           {
-            "internalType": "uint256",
-            "name": "rewardAmount",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "rewardAmount",
+            type: "uint256",
           },
           {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
+            internalType: "bool",
+            name: "isActive",
+            type: "bool",
           },
           {
-            "internalType": "address",
-            "name": "rewardToken",
-            "type": "address"
+            internalType: "address",
+            name: "rewardToken",
+            type: "address",
           },
           {
-            "internalType": "address",
-            "name": "claimedBy",
-            "type": "address"
+            internalType: "address",
+            name: "claimedBy",
+            type: "address",
           },
           {
-            "internalType": "uint256",
-            "name": "createdAt",
-            "type": "uint256"
-          }
+            internalType: "uint256",
+            name: "createdAt",
+            type: "uint256",
+          },
         ],
-        "internalType": "struct Cipherquest.Quest[]",
-        "name": "",
-        "type": "tuple[]"
-      }
+        internalType: "struct Cipherquest.Quest[]",
+        name: "",
+        type: "tuple[]",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_questId",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "_questId",
+        type: "uint256",
+      },
     ],
-    "name": "getQuest",
-    "outputs": [
+    name: "getQuest",
+    outputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "questId",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "questId",
+            type: "uint256",
           },
           {
-            "internalType": "address",
-            "name": "creator",
-            "type": "address"
+            internalType: "address",
+            name: "creator",
+            type: "address",
           },
           {
-            "internalType": "string",
-            "name": "question",
-            "type": "string"
+            internalType: "string",
+            name: "question",
+            type: "string",
           },
           {
-            "internalType": "string",
-            "name": "hint",
-            "type": "string"
+            internalType: "string",
+            name: "hint",
+            type: "string",
           },
           {
-            "internalType": "bytes32",
-            "name": "answer",
-            "type": "bytes32"
+            internalType: "bytes32",
+            name: "answer",
+            type: "bytes32",
           },
           {
-            "internalType": "uint256",
-            "name": "rewardAmount",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "rewardAmount",
+            type: "uint256",
           },
           {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
+            internalType: "bool",
+            name: "isActive",
+            type: "bool",
           },
           {
-            "internalType": "address",
-            "name": "rewardToken",
-            "type": "address"
+            internalType: "address",
+            name: "rewardToken",
+            type: "address",
           },
           {
-            "internalType": "address",
-            "name": "claimedBy",
-            "type": "address"
+            internalType: "address",
+            name: "claimedBy",
+            type: "address",
           },
           {
-            "internalType": "uint256",
-            "name": "createdAt",
-            "type": "uint256"
-          }
+            internalType: "uint256",
+            name: "createdAt",
+            type: "uint256",
+          },
         ],
-        "internalType": "struct Cipherquest.Quest",
-        "name": "",
-        "type": "tuple"
-      }
+        internalType: "struct Cipherquest.Quest",
+        name: "",
+        type: "tuple",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "start",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "start",
+        type: "uint256",
       },
       {
-        "internalType": "uint256",
-        "name": "end",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "end",
+        type: "uint256",
+      },
     ],
-    "name": "getQuests",
-    "outputs": [
+    name: "getQuests",
+    outputs: [
       {
-        "components": [
+        components: [
           {
-            "internalType": "uint256",
-            "name": "questId",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "questId",
+            type: "uint256",
           },
           {
-            "internalType": "address",
-            "name": "creator",
-            "type": "address"
+            internalType: "address",
+            name: "creator",
+            type: "address",
           },
           {
-            "internalType": "string",
-            "name": "question",
-            "type": "string"
+            internalType: "string",
+            name: "question",
+            type: "string",
           },
           {
-            "internalType": "string",
-            "name": "hint",
-            "type": "string"
+            internalType: "string",
+            name: "hint",
+            type: "string",
           },
           {
-            "internalType": "bytes32",
-            "name": "answer",
-            "type": "bytes32"
+            internalType: "bytes32",
+            name: "answer",
+            type: "bytes32",
           },
           {
-            "internalType": "uint256",
-            "name": "rewardAmount",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "rewardAmount",
+            type: "uint256",
           },
           {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
+            internalType: "bool",
+            name: "isActive",
+            type: "bool",
           },
           {
-            "internalType": "address",
-            "name": "rewardToken",
-            "type": "address"
+            internalType: "address",
+            name: "rewardToken",
+            type: "address",
           },
           {
-            "internalType": "address",
-            "name": "claimedBy",
-            "type": "address"
+            internalType: "address",
+            name: "claimedBy",
+            type: "address",
           },
           {
-            "internalType": "uint256",
-            "name": "createdAt",
-            "type": "uint256"
-          }
+            internalType: "uint256",
+            name: "createdAt",
+            type: "uint256",
+          },
         ],
-        "internalType": "struct Cipherquest.Quest[]",
-        "name": "",
-        "type": "tuple[]"
-      }
+        internalType: "struct Cipherquest.Quest[]",
+        name: "",
+        type: "tuple[]",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
+        internalType: "address",
+        name: "",
+        type: "address",
       },
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "name": "hasClaimed",
-    "outputs": [
+    name: "hasClaimed",
+    outputs: [
       {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
+    inputs: [],
+    name: "owner",
+    outputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "questCount",
-    "outputs": [
+    inputs: [],
+    name: "questCount",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "name": "quests",
-    "outputs": [
+    name: "quests",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "questId",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "questId",
+        type: "uint256",
       },
       {
-        "internalType": "address",
-        "name": "creator",
-        "type": "address"
+        internalType: "address",
+        name: "creator",
+        type: "address",
       },
       {
-        "internalType": "string",
-        "name": "question",
-        "type": "string"
+        internalType: "string",
+        name: "question",
+        type: "string",
       },
       {
-        "internalType": "string",
-        "name": "hint",
-        "type": "string"
+        internalType: "string",
+        name: "hint",
+        type: "string",
       },
       {
-        "internalType": "bytes32",
-        "name": "answer",
-        "type": "bytes32"
+        internalType: "bytes32",
+        name: "answer",
+        type: "bytes32",
       },
       {
-        "internalType": "uint256",
-        "name": "rewardAmount",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "rewardAmount",
+        type: "uint256",
       },
       {
-        "internalType": "bool",
-        "name": "isActive",
-        "type": "bool"
+        internalType: "bool",
+        name: "isActive",
+        type: "bool",
       },
       {
-        "internalType": "address",
-        "name": "rewardToken",
-        "type": "address"
+        internalType: "address",
+        name: "rewardToken",
+        type: "address",
       },
       {
-        "internalType": "address",
-        "name": "claimedBy",
-        "type": "address"
+        internalType: "address",
+        name: "claimedBy",
+        type: "address",
       },
       {
-        "internalType": "uint256",
-        "name": "createdAt",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "createdAt",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
     ],
-    "name": "removeTokenFromWhitelist",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "removeTokenFromWhitelist",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "view",
-    "type": "function"
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "revenue",
-    "outputs": [
+    inputs: [],
+    name: "revenue",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "revenueFees",
-    "outputs": [
+    inputs: [],
+    name: "revenueFees",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "newFee",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "newFee",
+        type: "uint256",
+      },
     ],
-    "name": "setRevenueFee",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "setRevenueFee",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_questId",
-        "type": "uint256"
+        internalType: "uint256",
+        name: "_questId",
+        type: "uint256",
       },
       {
-        "internalType": "bytes32",
-        "name": "_answer",
-        "type": "bytes32"
-      }
+        internalType: "bytes32",
+        name: "_answer",
+        type: "bytes32",
+      },
     ],
-    "name": "submitAnswer",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
+    name: "submitAnswer",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "name": "tokenWhitelist",
-    "outputs": [
+    name: "tokenWhitelist",
+    outputs: [
       {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function"
+    stateMutability: "view",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "withdraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    inputs: [],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "stateMutability": "payable",
-    "type": "receive"
-  }
+    stateMutability: "payable",
+    type: "receive",
+  },
 ];
 export const ERC20ABI = [
   "function approve(address spender, uint256 amount) public returns (bool)",

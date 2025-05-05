@@ -106,9 +106,7 @@ export const formatData = async (data) => {
         console.log(`amount: ${amount}`);
 
         // const { priceUsd, baseToken } = await getUsdPrice(data.rewardToken); //main
-        const { priceUsd, baseToken } = await getUsdPrice(
-          "0xF73978B3A7D1d4974abAE11f696c1b4408c027A0"
-        ); // E:G
+        const { priceUsd, baseToken } = await getUsdPrice(metadata.rewardToken); // E:G
 
         const amountInUsd = roundUpToThreeDecimals(priceUsd * amount);
         // console.log(priceUsd * amount);
@@ -161,9 +159,7 @@ export const formatSingleData = async (metadata) => {
       amount = ethers.utils.formatUnits(amountInWei, decimals);
 
       // const { priceUsd } = await getUsdPrice(metadata.rewardToken);
-      const { priceUsd, baseToken } = await getUsdPrice(
-        "0xF73978B3A7D1d4974abAE11f696c1b4408c027A0"
-      );
+      const { priceUsd, baseToken } = await getUsdPrice(metadata.rewardToken);
       usdValue = roundUpToThreeDecimals(priceUsd * amount);
     }
 
@@ -196,7 +192,7 @@ export const style = {
     ...base,
     backgroundColor: "var(--bg)",
     color: "var(--text)",
-    height:"50px",
+    height: "50px",
     borderColor: "var(--primary2)",
     outline: "none",
     borderStyle: "dotted",

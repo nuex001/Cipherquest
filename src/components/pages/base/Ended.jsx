@@ -90,16 +90,18 @@ function Ended() {
                      {quest.rewardToken ===
                      "0x0000000000000000000000000000000000000000" ? (
                        <img src={eth} alt="eth" />
-                     ) : (
-                       // <img
-                       //   src={`https://dd.dexscreener.com/ds-data/tokens/base/${quest.rewardToken}.png`}
-                       //   alt="token"
-                       // />
-                       <img
-                         src={`https://dd.dexscreener.com/ds-data/tokens/base/0xF73978B3A7D1d4974abAE11f696c1b4408c027A0.png`}
-                         alt="token"
-                       />
-                     )}
+                      ) : quest.rewardToken ===
+                      "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" ? (
+                      <img
+                        src={`https://basescan.org/token/images/centre-usdc_28.png`}
+                        alt="token"
+                      />
+                    ) : (
+                      <img
+                        src={`https://dd.dexscreener.com/ds-data/tokens/base/0xF73978B3A7D1d4974abAE11f696c1b4408c027A0.png`}
+                        alt="token"
+                      />
+                    )}
                      {formatNumberWithSuffix(quest.amount)}
                    </li>
                  </ul>
