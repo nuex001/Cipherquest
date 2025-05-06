@@ -13,7 +13,7 @@ function Nav() {
         {/* <span>Cipherquest</span> */}
       </Link>
       <div className="socialLinks">
-        <a href="http://t.me/cipherquest" target="_blank" className="btx">
+        <a href="https://t.me/cipherquest" target="_blank" className="btx">
           <FaTelegramPlane />
         </a>
         <a href="https://x.com/cipherquest" target="_blank" className="btx">
