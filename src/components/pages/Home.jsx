@@ -39,7 +39,7 @@ function Home() {
                   href="https://vimeo.com/1081951148" target="_blank"
                   style={{ color: "var(--text)", textDecoration: "underline" }}
                 >
-                  Link
+                Link
                 </a>
               )}
             </div>
