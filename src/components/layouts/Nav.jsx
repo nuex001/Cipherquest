@@ -13,10 +13,10 @@ function Nav() {
         {/* <span>Cipherquest</span> */}
       </Link>
       <div className="socialLinks">
-        <a href="https://t.me/cipherquest" target="_blank" className="btx">
+        <a href="https://t.me/cipherquest_official" target="_blank" className="btx">
           <FaTelegramPlane />
         </a>
-        <a href="https://x.com/cipherquest" target="_blank" className="btx">
+        <a href="#" target="_blank" className="btx">
           <FaXTwitter />
         </a>
         <ConnectButton.Custom>
