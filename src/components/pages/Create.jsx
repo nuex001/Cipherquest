@@ -203,7 +203,7 @@ function Create() {
     },
     {
       label: "Everybody needs base(ENB)",
-      value: "0x5B1519E41b3648FFa3F83b2a20661EfC2ff9100D",
+      value: "0xf73978b3a7d1d4974abae11f696c1b4408c027a0",
       image:
         "https://dd.dexscreener.com/ds-data/tokens/base/0xF73978B3A7D1d4974abAE11f696c1b4408c027A0.png",
     },
