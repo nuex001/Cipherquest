@@ -313,7 +313,7 @@ function Create() {
                   setFormData({ ...formData, amount: e.target.value })
                 }
               />
-              <span>Creating a quest costs 0.001 ETH.</span>
+              <span>Creating a quest costs 0.0003 ETH.</span>
             </div>
           </>
         )}
