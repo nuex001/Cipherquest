@@ -179,7 +179,7 @@ contract CipherquestTest is Test {
         console.log("initial balance: ", initialBalance);
         quest.createQuest{value: 2 ether}("Q?", "H", ANSWER, 0, address(0));
 
-         uint256 balanceAfterCreation = alice.balance;
+        uint256 balanceAfterCreation = alice.balance;
         console.log("initial balance: ", balanceAfterCreation);
 
         // Fast-forward 30 days + 1 second
@@ -189,7 +189,7 @@ contract CipherquestTest is Test {
         vm.prank(alice);
         quest.cancelQuest(1);
 
-         uint256 balanceAfterCancelling = alice.balance;
+        uint256 balanceAfterCancelling = alice.balance;
         console.log("initial balance: ", balanceAfterCancelling);
 
         // Verify quest is inactive
@@ -211,7 +211,6 @@ contract CipherquestTest is Test {
         token.approve(address(quest), 100 ether);
         quest.createQuest{value: FEE}("TQ?", "TH", ANSWER, 100 ether, address(token));
         vm.stopPrank();
-
 
         // Fast-forward time
         vm.warp(block.timestamp + 30 days + 1);

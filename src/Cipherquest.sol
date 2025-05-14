@@ -9,6 +9,8 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 contract Cipherquest is ReentrancyGuard, Ownable {
     using SafeERC20 for IERC20;
 
+    error Cipherquest__NotQuestCreator();
+
     struct Quest {
         uint256 questId; // Unique quest ID
         address creator; // The address of the user who created the quest
@@ -93,9 +95,8 @@ contract Cipherquest is ReentrancyGuard, Ownable {
         emit QuestCreated(questCount, msg.sender, _question, _main_RewardAmount);
     }
 
-    function cancelQuest(uint256 questId) external nonReentrant {
+    function cancelQuest(uint256 questId) external nonReentrant onlyCreator(msg.sender, questId) {
         Quest storage quest = quests[questId];
-        require(msg.sender == quest.creator, "Not the creator");
         require(quest.isActive, "Quest inactive");
         require(quest.claimedBy == address(0), "Already claimed");
         require(block.timestamp >= quest.createdAt + 30 days, "30 days not passed");
@@ -224,19 +225,26 @@ contract Cipherquest is ReentrancyGuard, Ownable {
         return result;
     }
 
-    // Function to get the answer for a specific quest (only creator or user who submitted)
+    // Function to get the quest
     function getQuest(uint256 _questId) external view returns (Quest memory) {
         return quests[_questId];
     }
 
     // Function to get the answer for a specific quest (only creator or user who submitted)
-    function getAnswer(uint256 _questId) external view returns (bytes32) {
+    function getAnswer(uint256 _questId) external onlyCreator(msg.sender, _questId) view returns (bytes32) {
         return quests[_questId].answer;
     }
 
     //
     function renounceOwnership() public view override onlyOwner {
         revert("Renouncing ownership is disabled");
+    }
+
+    modifier onlyCreator(address _address, uint256 _questId){
+        if (_address != quests[_questId].creator){
+            revert Cipherquest__NotQuestCreator();
+        }
+        _;
     }
 
     receive() external payable {
