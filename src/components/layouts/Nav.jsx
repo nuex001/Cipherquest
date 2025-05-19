@@ -16,7 +16,7 @@ function Nav() {
         <a href="https://t.me/cipherquest_official" target="_blank" className="btx">
           <FaTelegramPlane />
         </a>
-        <a href="#" target="_blank" className="btx">
+        <a href="https://x.com/Quest_cipher/" target="_blank" className="btx">
           <FaXTwitter />
         </a>
         <ConnectButton.Custom>
